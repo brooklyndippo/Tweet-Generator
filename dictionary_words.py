@@ -25,4 +25,6 @@ def random_dict_words():
 
     dict.close()
 
+#call the function
 random_dict_words()
+
