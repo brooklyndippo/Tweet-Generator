@@ -2,31 +2,23 @@ import random
 import sys, random
 from string import punctuation
 
+from markupsafe import string
+
 
 def histogram(file):
- 
-    #take in a text file as an argument
-    #file = sys.argv[1]
     
-    #open the file and read it 
-    file = open(file, "r")
-
-    #separate into words at each space
-    words = file.read().split(" ")
-
-    #initialize an empty dictionary
-    #key = word, value = appearance count
+    #initialize an empty dictionary:  key = word, value = appearance_count
     dictionary = {}
 
-    #remove any punctuation from beginning/end of words 
-    for word in words:
-        #strip the punctionation from both sides of the word & convert to lowercase
-        word = word.lstrip(punctuation).rstrip(punctuation).strip('\n').lower()
-        #add or increment in the dictionary
-        if word not in dictionary:
-            dictionary[word] = 1 
-        else:
-            dictionary[word] += 1
+    with open(file, "r") as file:
+        for line in file:
+            for word in line.split():
+                #strip the punctionation from both sides of the word & convert to lowercase
+                word = word.lstrip(punctuation).rstrip(punctuation).strip('\n').lower()
+                if word not in dictionary:
+                    dictionary[word] = 1 
+                else:
+                    dictionary[word] += 1
 
 
     for word in dictionary:
@@ -34,7 +26,9 @@ def histogram(file):
     
     unique_words(dictionary)
 
-    frequency('bad', dictionary)
+    frequency('fish', dictionary)
+
+    sample(dictionary)
     
 
 def unique_words(dictionary):
@@ -44,15 +38,23 @@ def unique_words(dictionary):
     
 
 def frequency(word, dictionary):
-
-    #add a default word frequency of zero
     if word in dictionary:
         print(f'\nThe word {word} appears {dictionary[word]} times in this text.\n')
     else:
         print(f'\nThe word {word} appears 0 times in this text.\n')
 
 
+def sample(dictionary):
+
+    total_words = sum(dictionary.values())
+
+    print(f'total words: {total_words}') 
+
+    sample_num = random.randint(0, total_words)
+
+
+
 
 # name is the function being imported // main is the function called on the command line
 if __name__ == "__main__":
-    histogram('lorax.txt')
+    histogram('fish.txt')
