@@ -44,8 +44,6 @@ def sample(dictionary):
 
     total_words = sum(dictionary.values())
 
-    #print(f'total words: {total_words}') 
-
     #generate a random number
     sample_num = random.randrange(0, total_words)
     #print(f'sample_num: {sample_num}')
