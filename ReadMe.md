@@ -10,6 +10,12 @@ This project will make tweets!
 
 ## Command Reference
 
+### To use Docker Compose
+
+```bash
+docker-compose up --build 
+```
+
 ### 1. Build the Image
 
 ```bash
